@@ -1,6 +1,7 @@
 package com.project2.bindings;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class CitizenPlan {
 	
 	@Id
+	@GeneratedValue
 	private Integer cid;
 	private  String planName;
 	private String planStatus;

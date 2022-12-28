@@ -9,9 +9,9 @@ import com.project2.bindings.CitizenPlan;
 
 public interface CitizenPlanRepository extends JpaRepository<CitizenPlan, Integer> {
 
-	@Query("select distct(planStatus) from CitizenPlan")
+	@Query("select distinct(planStatus) from CitizenPlan")
 	public List<String> getPlanStatus();
 	
-	@Query("select distct(planName) from CitizenPlan ")
+	@Query("select distinct(planName) from CitizenPlan ")
 	public List<String> getPlanName();
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.ss.usermodel.PaperSize;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,8 +18,9 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.project2.bindings.CitizenPlan;
 import com.project2.bindings.SearchRequest;
@@ -103,7 +103,7 @@ public class CitizenServiceImpl implements CitizenService {
 		Document document = new Document(PageSize.A4);
 		PdfWriter.getInstance(document, reponse.getOutputStream());
 		document.open();
-		Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+		Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
 		font.setSize(18);
 		font.setColor(Color.BLUE);
 
@@ -115,6 +115,31 @@ public class CitizenServiceImpl implements CitizenService {
 		table.setWidthPercentage(100f);
 		table.setWidths(new float[] { 1.5f, 3.5f, 3.0f, 4.0f, 4.0f, 3.5f, 3.5f });
 		table.setSpacingBefore(10);
+
+		PdfPCell cell = new PdfPCell();
+		cell.setBackgroundColor(Color.BLUE);
+		cell.setPadding(5);
+
+		cell.setPhrase(new Phrase("Citizen Id", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Name", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Gender", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Phone Num", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("SSN", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Plane Name", font));
+		table.addCell(cell);
+
+		cell.setPhrase(new Phrase("Plan Status", font));
+		table.addCell(cell);
 
 		for (CitizenPlan citizenplan : citizenplanlist) {
 			table.addCell(String.valueOf(citizenplan.getCid()));
